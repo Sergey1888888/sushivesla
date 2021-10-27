@@ -1,0 +1,57 @@
+import React, {useContext, useEffect} from 'react';
+import styled from "styled-components";
+import {useTypedSelector} from "../hooks/useTypedSelector";
+import {AdaptiveContext} from "../App";
+import {useActions} from "../hooks/useActions";
+import Item from "../components/Item";
+import Text from "../components/Text";
+
+const Grid = styled.div`
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 10px;
+    
+    @media screen and (max-width: 1360px) {
+        grid-template-columns: repeat(2, 1fr);
+    }
+    
+    @media screen and (max-width: 1180px) {
+        grid-template-columns: repeat(1, 1fr);
+        gap: 1px;
+        background-color: ${({theme}) => theme.colors.background.grey};
+    }
+`
+
+const Container = styled.div`
+    width: 100%;
+    height: 44px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: ${({theme}) => theme.colors.background.grey};
+`
+
+const Supy: React.FC = () => {
+    const isMobile = useContext<boolean>(AdaptiveContext);
+    const {getSupy} = useActions();
+    const {supy} = useTypedSelector(state => state.supy);
+
+    useEffect(() => {
+        document.title = 'СушиВесла - Супы'
+        getSupy()
+    }, [])
+
+    return (<>
+            {isMobile && <Container>
+                <Text fontSize='17px' lineHeight='24px' fontWeight='bold' color='darkGrey'>Супы</Text>
+            </Container>}
+            <Grid>
+                {supy.map(sup => <Item key={sup.id} image={sup.image} header={sup.name}
+                                       description={sup.description} price={sup.price}
+                                       weight={sup.weight} $backgroundColor={sup.color}/>)}
+            </Grid>
+        </>
+    );
+}
+
+export default Supy;
