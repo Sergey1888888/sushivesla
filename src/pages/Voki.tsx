@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import styled from "styled-components";
 import {useTypedSelector} from "../hooks/useTypedSelector";
-import {AdaptiveContext} from "../App";
+import {AdaptiveContext, AdaptiveContextProps} from "../App";
 import {useActions} from "../hooks/useActions";
 import Item from "../components/Item";
 import Text from "../components/Text";
@@ -32,7 +32,7 @@ const Container = styled.div`
 `
 
 const Voki: React.FC = () => {
-    const isMobile = useContext<boolean>(AdaptiveContext);
+    const {isMobile} = useContext<Partial<AdaptiveContextProps>>(AdaptiveContext);
     const {getVoki} = useActions();
     const {voki} = useTypedSelector(state => state.voki);
 

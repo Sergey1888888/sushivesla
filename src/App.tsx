@@ -16,12 +16,17 @@ import FriedRolls from "./pages/FriedRolls";
 import BakedRolls from "./pages/BakedRolls";
 import Voki from "./pages/Voki";
 
-export const AdaptiveContext = React.createContext<boolean>(false);
+export interface AdaptiveContextProps {
+    isMobile: boolean;
+}
+
+export const AdaptiveContext = React.createContext<Partial<AdaptiveContextProps>>({});
 
 const App = () => {
     const isMobile = useAdaptive();
+    if (typeof isMobile === 'undefined') return <></>
     return (
-        <AdaptiveContext.Provider value={isMobile}>
+        <AdaptiveContext.Provider value={{isMobile}}>
             <Wrapper>
                 <Header/>
                 <Switch>
