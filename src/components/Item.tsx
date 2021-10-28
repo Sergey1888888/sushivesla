@@ -171,7 +171,7 @@ const Item: React.FC<ItemProps> = ({
                         {description}
                     </Text>
                     <Text display='inline' fontSize='0.67vw' color='lightDark'>
-                        {weight && <>{weight} {typeof weight === 'string' ? 'л.' : 'г.'}г.</>} {count && <>{count} шт.</>}
+                        {weight && <>{weight} {typeof weight === 'string' ? 'л.' : 'г.'}</>} {count && <>{count} шт.</>}
                     </Text>
                 </Container>
                 <Container>
