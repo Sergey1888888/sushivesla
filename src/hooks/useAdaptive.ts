@@ -8,7 +8,9 @@ export const useAdaptive = (): boolean | undefined => {
     useEffect(() => {
         if (windowSize && windowSize <= 1180) {
             setIsMobile(true);
-        } else setIsMobile(false);
+        } else if (windowSize && windowSize > 1180) {
+            setIsMobile(false);
+        }
     }, [windowSize])
 
     return isMobile;
